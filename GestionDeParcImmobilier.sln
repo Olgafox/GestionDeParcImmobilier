@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2-Persistence", "2-Persistence", "{A7E4C52A-C413-4E31-9ACA-129522CDBFC5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1-Presentation", "1-Presentation", "{F198789F-6B5F-4EE0-9759-963172B23888}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GPI.Presentation", "GPI.Presentation\GPI.Presentation.csproj", "{9144B613-B182-4E45-BEC3-D7621472EBA6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GPI.Persistence", "GPI.Persistence\GPI.Persistence.csproj", "{2759A322-86A1-4B2E-8413-632F27B61BF7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9144B613-B182-4E45-BEC3-D7621472EBA6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9144B613-B182-4E45-BEC3-D7621472EBA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9144B613-B182-4E45-BEC3-D7621472EBA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9144B613-B182-4E45-BEC3-D7621472EBA6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2759A322-86A1-4B2E-8413-632F27B61BF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2759A322-86A1-4B2E-8413-632F27B61BF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2759A322-86A1-4B2E-8413-632F27B61BF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2759A322-86A1-4B2E-8413-632F27B61BF7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{9144B613-B182-4E45-BEC3-D7621472EBA6} = {F198789F-6B5F-4EE0-9759-963172B23888}
+		{2759A322-86A1-4B2E-8413-632F27B61BF7} = {A7E4C52A-C413-4E31-9ACA-129522CDBFC5}
+	EndGlobalSection
+EndGlobal

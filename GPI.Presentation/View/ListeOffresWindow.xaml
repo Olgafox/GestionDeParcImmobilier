@@ -1,0 +1,98 @@
+﻿<Window x:Class="GPI.Presentation.View.ListeOffresWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GPI.Presentation.View"
+        mc:Ignorable="d" WindowStartupLocation="CenterOwner"
+        Title="Liste des Offres" Height="500" Width="700" Background="WhiteSmoke">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Background="FloralWhite" Margin="0,20,-195,0">
+            <Button   Command="{Binding SupprimerCommand}" Width="40" Height="40" Background="FloralWhite"
+                      Margin="520,2,10,4" ToolTip="Supprimer cette offre" HorizontalAlignment="Right">
+                <Image Source="/Images/deleteIcon.png" Stretch="UniformToFill" />
+            </Button>
+            <Button Command="{Binding ImprimerCommand}" Width="40" Height="40" Background="FloralWhite" Margin="30,2,10,4" ToolTip="Imprimer cette offre">
+                <Image Source="/Images/printIcon.png" Stretch="UniformToFill" />
+            </Button>
+        </StackPanel>
+        
+        <ListView  Margin="30,20,10,10" Height="380" VerticalAlignment="Top"
+                       Grid.Column="0" Grid.Row="1" ItemsSource="{Binding ListeOffres}" 
+                       SelectedItem="{Binding CurrentOffre}" Width="200">
+        </ListView>
+        <Grid Grid.Column="1" Grid.Row="1">
+            <!--Details d'une offre-->
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0" Grid.Row="0" Width="120" Margin="20,20,0,0">
+                <Label Content="Type de bien :" FontWeight="SemiBold" ></Label>
+                <TextBox Margin="1"  Text="{Binding CurrentOffre.TypeImmobilier.TypeNom}"></TextBox>
+            </StackPanel>
+            <StackPanel Grid.Column="1" Grid.Row="0" Width="120" Margin="20,20,0,0">
+                <Label Content="Surface :" FontWeight="SemiBold" ></Label>
+                <TextBox Margin="1" TextBox.Text="{Binding Path=CurrentOffre.Surface}"></TextBox>
+            </StackPanel>
+            <StackPanel Grid.Column="2" Grid.Row="0" Width="120" Margin="20,20,0,0">
+                <Label Content="Nbr de pieces :" FontWeight="SemiBold" ></Label>
+                <TextBox Margin="1" TextBox.Text="{Binding Path=CurrentOffre.Pieces}"></TextBox>
+            </StackPanel>
+            <StackPanel Grid.Column="0" Grid.Row="1"  Width="120" Margin="20,20,0,0">
+                <Label Content="Etage :" FontWeight="SemiBold" ></Label>
+                <TextBox Margin="1" TextBox.Text="{Binding Path=CurrentOffre.Etage}"></TextBox>
+            </StackPanel>
+            <StackPanel Grid.Column="1" Grid.Row="1" Width="120" Margin="20,20,0,0">
+                <Label Content="Nbr d'étages :" FontWeight="SemiBold" ></Label>
+                <TextBox Margin="1" TextBox.Text="{Binding Path=CurrentOffre.Nombre_Etages}"></TextBox>
+            </StackPanel>
+            <StackPanel Grid.Column="2" Grid.Row="1" Width="120" Margin="20,20,0,0">
+                <Label Content="Prix:" FontWeight="SemiBold"></Label>
+                <TextBox Margin="1" TextBox.Text="{Binding Path=CurrentOffre.Prix}"></TextBox>
+            </StackPanel>
+            <StackPanel Grid.Column="0" Grid.Row ="2"  Grid.ColumnSpan="2" Margin="20,20,0,0">
+                <Label Content="Rue :" FontWeight="SemiBold"></Label>
+                <TextBox Margin="1" TextBox.Text="{Binding Path=CurrentOffre.Rue}"></TextBox>
+            </StackPanel>
+            <StackPanel Grid.Column="2" Grid.Row ="2" Margin="20,20,0,0">
+                <Label Content="NPA :" FontWeight="SemiBold"></Label>
+                <TextBox Margin="1" TextBox.Text="{Binding Path=CurrentOffre.Npa}"></TextBox>
+            </StackPanel>
+            <StackPanel Grid.Column="0" Grid.Row ="3" Margin="20,20,0,0">
+                <Label Content="Localité :" FontWeight="SemiBold"></Label>
+                <TextBox Margin="1" TextBox.Text="{Binding Path=CurrentOffre.Localite}"></TextBox>
+            </StackPanel>
+            <StackPanel Grid.Column="1" Grid.Row ="3" Margin="20,20,0,0">
+                <Label Content="Région :" FontWeight="SemiBold" ></Label>
+                <TextBox Text="{Binding Path=CurrentOffre.Region.NomRegion}" Margin="1"></TextBox>
+            </StackPanel>
+            <StackPanel Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="2" Margin="20,20,0,0">
+                <Label Content="Vendeur :" FontWeight="SemiBold"></Label>
+                <TextBox Margin="1" Text="{Binding Path=CurrentOffre.Client.PrenomNom}"></TextBox>
+            </StackPanel>
+            <StackPanel Grid.Column="3" Grid.Row="3" Width="120" Margin="20,20,0,0">
+                <Label Content="Actuel :" FontWeight="SemiBold" ></Label>
+                <TextBox Margin="1" Text="{Binding Path=CurrentOffre.IsActuel}"></TextBox>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>

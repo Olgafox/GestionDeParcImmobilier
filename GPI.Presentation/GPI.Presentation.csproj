@@ -1,0 +1,396 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{9144B613-B182-4E45-BEC3-D7621472EBA6}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GPI.Presentation</RootNamespace>
+    <AssemblyName>GPI.Presentation</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight, Version=5.3.0.19026, Culture=neutral, PublicKeyToken=e7570ab207bcb616, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.3.0.0\lib\net45\GalaSoft.MvvmLight.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.Extras, Version=5.3.0.19032, Culture=neutral, PublicKeyToken=669f0b5e8f868abf, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.3.0.0\lib\net45\GalaSoft.MvvmLight.Extras.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.Platform, Version=5.3.0.19032, Culture=neutral, PublicKeyToken=5f873c45e98af8a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.3.0.0\lib\net45\GalaSoft.MvvmLight.Platform.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.Common, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.3.0.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Reporting\AgentReporting\AgentForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reporting\AgentReporting\AgentForm.designer.cs">
+      <DependentUpon>AgentForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reporting\AgentReporting\AgentReporting.cs" />
+    <Compile Include="Reporting\AgentReporting\ReportedAgent.cs" />
+    <Compile Include="Reporting\ClientReporting\ClientForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reporting\ClientReporting\ClientForm.designer.cs">
+      <DependentUpon>ClientForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reporting\ClientReporting\ClientReport.cs" />
+    <Compile Include="Reporting\ClientReporting\ReportedClient.cs" />
+    <Compile Include="Reporting\ClientReporting\VenteAcheteurReport.cs" />
+    <Compile Include="Reporting\ClientReporting\VenteClient.cs" />
+    <Compile Include="Reporting\ClientReporting\VenteVendeurReport.cs" />
+    <Compile Include="Reporting\OffreReporting\OffreForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reporting\OffreReporting\OffreForm.Designer.cs">
+      <DependentUpon>OffreForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reporting\OffreReporting\OffreReport.cs" />
+    <Compile Include="Reporting\OffreReporting\ReportingOffre.cs" />
+    <Compile Include="Reporting\RechercheReporting\RechercheForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reporting\RechercheReporting\RechercheForm.Designer.cs">
+      <DependentUpon>RechercheForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reporting\RechercheReporting\RechercheResult.cs" />
+    <Compile Include="Reporting\VenteReporting\ReportedVente.cs" />
+    <Compile Include="Reporting\VenteReporting\VenteForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reporting\VenteReporting\VenteForm.Designer.cs">
+      <DependentUpon>VenteForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reporting\VenteReporting\VenteReporting.cs" />
+    <Compile Include="ViewModel\AgentViewModel.cs" />
+    <Compile Include="ViewModel\ChercherOffreViewModel.cs" />
+    <Compile Include="ViewModel\ClientViewModel.cs" />
+    <Compile Include="ViewModel\DemandeViewModel.cs" />
+    <Compile Include="ViewModel\ICrud.cs" />
+    <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\NewDemandeViewModel.cs" />
+    <Compile Include="ViewModel\NewOffreViewModel.cs" />
+    <Compile Include="ViewModel\OffreViewModel.cs" />
+    <Compile Include="ViewModel\RegionTypeViewModel.cs" />
+    <Compile Include="ViewModel\VenteViewModel.cs" />
+    <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Compile Include="View\AgentInfoUserControl.xaml.cs">
+      <DependentUpon>AgentInfoUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\AgentUserControl.xaml.cs">
+      <DependentUpon>AgentUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ChercherOffreWindow.xaml.cs">
+      <DependentUpon>ChercherOffreWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ClientInfoUserControl.xaml.cs">
+      <DependentUpon>ClientInfoUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ClientInfoWindow.xaml.cs">
+      <DependentUpon>ClientInfoWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ClientUserControl.xaml.cs">
+      <DependentUpon>ClientUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\DemandeUserControl.xaml.cs">
+      <DependentUpon>DemandeUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\InfoWindow.xaml.cs">
+      <DependentUpon>InfoWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ListeDemandesWindow.xaml.cs">
+      <DependentUpon>ListeDemandesWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ListeOffresWindow.xaml.cs">
+      <DependentUpon>ListeOffresWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ListeVentesWindow.xaml.cs">
+      <DependentUpon>ListeVentesWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\NewDemandeUserControl.xaml.cs">
+      <DependentUpon>NewDemandeUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\NewOffreUserControl.xaml.cs">
+      <DependentUpon>NewOffreUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\NewOffreWindow.xaml.cs">
+      <DependentUpon>NewOffreWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\NewVenteWindow.xaml.cs">
+      <DependentUpon>NewVenteWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\OffreUserControl.xaml.cs">
+      <DependentUpon>OffreUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\RegionTypeUserControl.xaml.cs">
+      <DependentUpon>RegionTypeUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\VenteDetailWindow.xaml.cs">
+      <DependentUpon>VenteDetailWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\VenteUserControl.xaml.cs">
+      <DependentUpon>VenteUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="View\AgentInfoUserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\AgentUserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ChercherOffreWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ClientInfoUserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ClientInfoWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ClientUserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\DemandeUserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\InfoWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ListeDemandesWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ListeOffresWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ListeVentesWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\MainWindowResources.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\NewDemandeUserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\NewOffreUserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\NewOffreWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\NewVenteWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\OffreUserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\RegionTypeUserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\VenteDetailWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\VenteUserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Mvvm\ValidationRules.cs" />
+    <Compile Include="Mvvm\ViewModelBase.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reporting\AgentReporting\AgentForm.resx">
+      <DependentUpon>AgentForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reporting\AgentReporting\AgentReport.rdlc" />
+    <EmbeddedResource Include="Reporting\ClientReporting\ClientForm.resx">
+      <DependentUpon>ClientForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reporting\ClientReporting\ClientReport.rdlc" />
+    <EmbeddedResource Include="Reporting\OffreReporting\OffreForm.resx">
+      <DependentUpon>OffreForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reporting\OffreReporting\OffreReport.rdlc" />
+    <EmbeddedResource Include="Reporting\RechercheReporting\RechercheForm.resx">
+      <DependentUpon>RechercheForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reporting\RechercheReporting\RechercheReport.rdlc" />
+    <EmbeddedResource Include="Reporting\VenteReporting\VenteForm.resx">
+      <DependentUpon>VenteForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reporting\VenteReporting\VenteReport.rdlc" />
+    <None Include="packages.config" />
+    <None Include="Properties\DataSources\GPI.Persistence.EntityRepositories.Agent.datasource" />
+    <None Include="Properties\DataSources\GPI.Persistence.EntityRepositories.Client.datasource" />
+    <None Include="Properties\DataSources\GPI.Persistence.EntityRepositories.Demande.datasource" />
+    <None Include="Properties\DataSources\GPI.Persistence.EntityRepositories.GPI_EntityDataModel.datasource" />
+    <None Include="Properties\DataSources\GPI.Persistence.EntityRepositories.Offre.datasource" />
+    <None Include="Properties\DataSources\GPI.Persistence.EntityRepositories.Region.datasource" />
+    <None Include="Properties\DataSources\GPI.Persistence.EntityRepositories.TypeImmobilier.datasource" />
+    <None Include="Properties\DataSources\GPI.Persistence.EntityRepositories.Vente.datasource" />
+    <None Include="Properties\DataSources\GPI.Presentation.Properties.Resources.datasource" />
+    <None Include="Properties\DataSources\GPI.Presentation.Properties.Settings.datasource" />
+    <None Include="Properties\DataSources\GPI.Presentation.Reporting.AgentForm.datasource" />
+    <None Include="Properties\DataSources\GPI.Presentation.Reporting.AgentReporting.datasource" />
+    <None Include="Properties\DataSources\GPI.Presentation.Reporting.ClientReport.datasource" />
+    <None Include="Properties\DataSources\GPI.Presentation.Reporting.ClientReporting.ClientForm.datasource" />
+    <None Include="Properties\DataSources\GPI.Presentation.Reporting.OffreReport.datasource" />
+    <None Include="Properties\DataSources\GPI.Presentation.Reporting.OffreReporting.OffreForm.datasource" />
+    <None Include="Properties\DataSources\GPI.Presentation.Reporting.RechercheReporting.RechercheForm.datasource" />
+    <None Include="Properties\DataSources\GPI.Presentation.Reporting.RechercheResult.datasource" />
+    <None Include="Properties\DataSources\GPI.Presentation.Reporting.ReportedAgent.datasource" />
+    <None Include="Properties\DataSources\GPI.Presentation.Reporting.ReportedClient.datasource" />
+    <None Include="Properties\DataSources\GPI.Presentation.Reporting.ReportedVente.datasource" />
+    <None Include="Properties\DataSources\GPI.Presentation.Reporting.ReportingOffre.datasource" />
+    <None Include="Properties\DataSources\GPI.Presentation.Reporting.VenteAcheteurReport.datasource" />
+    <None Include="Properties\DataSources\GPI.Presentation.Reporting.VenteClient.datasource" />
+    <None Include="Properties\DataSources\GPI.Presentation.Reporting.VenteReport.datasource" />
+    <None Include="Properties\DataSources\GPI.Presentation.Reporting.VenteReporting.VenteForm.datasource" />
+    <None Include="Properties\DataSources\GPI.Presentation.Reporting.VenteVendeurReport.datasource" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\deleteIcon.png" />
+    <Resource Include="Images\eye.png" />
+    <Resource Include="Images\infoIcon.png" />
+    <Resource Include="Images\newIcon.png" />
+    <Resource Include="Images\printIcon.png" />
+    <Resource Include="Images\saveIcon.png" />
+    <Resource Include="Images\searchIcon.png" />
+    <Resource Include="Images\searchIcon2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GPI.Persistence\GPI.Persistence.csproj">
+      <Project>{2759A322-86A1-4B2E-8413-632F27B61BF7}</Project>
+      <Name>GPI.Persistence</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,292 @@
+﻿<Window x:Class="GPI.Presentation.View.NewVenteWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GPI.Presentation.View"
+        xmlns:helpers="clr-namespace:GPI.Presentation.Mvvm"
+        mc:Ignorable="d" WindowStartupLocation="CenterOwner"
+        Title="Nouvelle Vente" Height="650" Width="610"  Background="WhiteSmoke">
+    <Window.Resources>
+        <helpers:NotEmptyStringRule x:Key="NotEmptyString" ValidatesOnTargetUpdated="True"></helpers:NotEmptyStringRule>
+        <Style x:Key="ErrorStyle" TargetType="{x:Type Control}">
+
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="true">
+                    <Setter Property="ToolTip" Value="{Binding (Validation.Errors)[0].ErrorContent, RelativeSource={RelativeSource Self}}"/>
+                </Trigger>
+            </Style.Triggers>
+
+        </Style>
+
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0" Grid.Row="0" Width="160" Margin="30,20,0,0">
+            <Label Content="Offre :" FontWeight="SemiBold"  ></Label>
+            <ComboBox  x:Name="ComOffre" Background="FloralWhite" ItemsSource="{Binding Path=ListeOffres}">
+                <ComboBox.SelectedItem>
+                    <Binding Path="SelectedOffre" ValidatesOnDataErrors="True" 
+                         Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <helpers:NotEmptyComboBoxRule ValidatesOnTargetUpdated="True"/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </ComboBox.SelectedItem>
+            </ComboBox>
+            <Label FontSize="9" Target="{Binding ElementName=ComOffre}">
+                <Label.Style>
+                    <Style TargetType="{x:Type Label}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding (Validation.HasError), ElementName=ComOffre}" Value="True">
+                                <Setter Property="Foreground" Value="Red" />
+                                <Setter Property="Content" Value="{Binding (Validation.Errors)[0].ErrorContent, ElementName=ComOffre}"/>
+                                <Setter Property="ToolTip" Value="{Binding (Validation.Errors)[0].ErrorContent, ElementName=ComOffre}" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Label.Style>
+            </Label>
+        </StackPanel>
+        <StackPanel Grid.Column="1" Grid.Row="0" Width="160" Margin="30,20,0,0">
+            <Label Content="Surface :" FontWeight="SemiBold" ></Label>
+            <TextBox x:Name="Surface">
+                <Binding Path="SelectedOffre.Surface">
+                    <Binding.ValidationRules>
+                        <helpers:DecimalValidationRule ValidatesOnTargetUpdated="True" /> <!--<ValidatesOnTargetUpdated="True"/>-->
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox>
+            <Label FontSize="9" Target="{Binding ElementName=Surface}">
+                <Label.Style>
+                    <Style TargetType="{x:Type Label}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding (Validation.HasError), ElementName=Surface}" Value="True">
+                                <Setter Property="Foreground" Value="Red" />
+                                <Setter Property="Content" Value="{Binding (Validation.Errors)[0].ErrorContent, ElementName=Surface}"/>
+                                <Setter Property="ToolTip" Value="{Binding (Validation.Errors)[0].ErrorContent, ElementName=Surface}" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Label.Style>
+            </Label>
+        </StackPanel>
+        <StackPanel Grid.Column="2" Grid.Row="0" Width="160" Margin="30,20,0,0">
+            <Label Content="Nbr de pieces :" FontWeight="SemiBold" ></Label>
+            <TextBox x:Name="Pieces">
+                <Binding Path="SelectedOffre.Pieces" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <helpers:DecimalValidationRule ValidatesOnTargetUpdated="True"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox>
+            <Label FontSize="9" Target="{Binding ElementName=Pieces}">
+                <Label.Style>
+                    <Style TargetType="{x:Type Label}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding (Validation.HasError), ElementName=Pieces}" Value="True">
+                                <Setter Property="Foreground" Value="Red" />
+                                <Setter Property="Content" Value="{Binding (Validation.Errors)[0].ErrorContent, ElementName=Pieces}"/>
+                                <Setter Property="ToolTip" Value="{Binding (Validation.Errors)[0].ErrorContent, ElementName=Pieces}" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Label.Style>
+            </Label>
+        </StackPanel>
+        <StackPanel Grid.Column="2" Grid.Row="1" Width="160"  Margin="30,20,0,0">
+            <Label Content="Commission d'agent % :" FontWeight="SemiBold" ></Label>
+            <TextBox x:Name="TauxComAgent">
+                <Binding Path="CurrentVente.TauxCommissionAgent" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <helpers:DecimalValidationRule ValidatesOnTargetUpdated="True"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox>
+            <Label FontSize="9" Target="{Binding ElementName=TauxComAgent}">
+                <Label.Style>
+                    <Style TargetType="{x:Type Label}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding (Validation.HasError), ElementName=TauxComAgent}" Value="True">
+                                <Setter Property="Foreground" Value="Red" />
+                                <Setter Property="Content" Value="{Binding (Validation.Errors)[0].ErrorContent, ElementName=TauxComAgent}"/>
+                                <Setter Property="ToolTip" Value="{Binding (Validation.Errors)[0].ErrorContent, ElementName=TauxComAgent}" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Label.Style>
+            </Label>
+        </StackPanel>
+        <StackPanel Grid.Column="1" Grid.Row="1" Width="160"  Margin="30,20,0,0">
+            <Label Content="Commission % :" FontWeight="SemiBold" ></Label>
+            <TextBox x:Name="TauxCom">
+                <Binding Path="CurrentVente.TauxCommission" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <helpers:DecimalValidationRule ValidatesOnTargetUpdated="True"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox>
+            <Label FontSize="9" Target="{Binding ElementName=TauxCom}">
+                <Label.Style>
+                    <Style TargetType="{x:Type Label}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding (Validation.HasError), ElementName=TauxCom}" Value="True">
+                                <Setter Property="Foreground" Value="Red" />
+                                <Setter Property="Content" Value="{Binding (Validation.Errors)[0].ErrorContent, ElementName=TauxCom}"/>
+                                <Setter Property="ToolTip" Value="{Binding (Validation.Errors)[0].ErrorContent, ElementName=TauxCom}" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Label.Style>
+            </Label>
+        </StackPanel>
+        <StackPanel Grid.Column="0" Grid.Row="1" Width="160"  Margin="30,20,0,0" HorizontalAlignment="Left" Height="47" VerticalAlignment="Top">
+            <Label Content="Prix:" FontWeight="SemiBold"></Label>
+            <TextBox x:Name="Prix">
+                <Binding Path="SelectedOffre.Prix" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <helpers:DecimalValidationRule ValidatesOnTargetUpdated="True"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox>
+            <Label FontSize="9" Target="{Binding ElementName=Prix}">
+                <Label.Style>
+                    <Style TargetType="{x:Type Label}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding (Validation.HasError), ElementName=Prix}" Value="True">
+                                <Setter Property="Foreground" Value="Red" />
+                                <Setter Property="Content" Value="{Binding (Validation.Errors)[0].ErrorContent, ElementName=Prix}"/>
+                                <Setter Property="ToolTip" Value="{Binding (Validation.Errors)[0].ErrorContent, ElementName=Prix}" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Label.Style>
+            </Label>
+        </StackPanel>
+        <StackPanel Grid.Column="0" Grid.Row ="2"  Grid.ColumnSpan="3" Margin="30,20,0,0">
+            <Label Content="Adresse :" FontWeight="SemiBold"></Label>
+            <TextBox x:Name="T"  IsReadOnly="True">
+                <Binding Path="SelectedOffre.AdresseSansEspace" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <helpers:NotEmptyStringRule ValidatesOnTargetUpdated="True"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox>
+            <Label x:Name="ErrorLabel" FontSize="9" Target="{Binding ElementName=T}">
+                <Label.Style>
+                    <Style TargetType="{x:Type Label}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding (Validation.HasError), ElementName=T}" Value="True">
+                                <Setter Property="Foreground" Value="Red" />
+                                <Setter Property="Content" Value="{Binding (Validation.Errors)[0].ErrorContent, ElementName=T}"/>
+                                <Setter Property="ToolTip" Value="{Binding (Validation.Errors)[0].ErrorContent, ElementName=T}" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Label.Style> 
+            </Label>
+        </StackPanel>
+        <StackPanel Grid.Column="0" Grid.Row ="4"  Margin="30,20,0,0" Grid.ColumnSpan="2">
+            <Label Content="Acheteur :" FontWeight="SemiBold"></Label>
+            <ComboBox Margin="1" ItemsSource="{Binding Path=ListeClients}" x:Name="ComClient">
+                <ComboBox.SelectedItem>
+                    <Binding Path="SelectedAcheteur" ValidatesOnDataErrors="True" 
+                         Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <helpers:NotEmptyComboBoxRule ValidatesOnTargetUpdated="True"/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </ComboBox.SelectedItem>
+            </ComboBox>
+            <Label FontSize="9" Target="{Binding ElementName=ComClient}">
+                <Label.Style>
+                    <Style TargetType="{x:Type Label}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding (Validation.HasError), ElementName=ComClient}" Value="True">
+                                <Setter Property="Foreground" Value="Red" />
+                                <Setter Property="Content" Value="{Binding (Validation.Errors)[0].ErrorContent, ElementName=ComClient}"/>
+                                <Setter Property="ToolTip" Value="{Binding (Validation.Errors)[0].ErrorContent, ElementName=ComClient}" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Label.Style>
+            </Label>
+        </StackPanel>
+        <StackPanel Grid.Column="2" Grid.Row ="3" Margin="30,20,0,0">
+            <Label Content="Date de Vente :" FontWeight="SemiBold"></Label>
+            <DatePicker x:Name="PickDateVente" HorizontalAlignment="Left" Height="23" Grid.Row="1" SelectedDate="{Binding CurrentVente.DateVente}" 
+                        VerticalAlignment="Center" Width="160" FirstDayOfWeek="Monday" 
+                       DisplayDateStart="1/1/2017"></DatePicker>
+        </StackPanel>
+        <StackPanel Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2"  Margin="30,20,0,0">
+            <Label Content="Vendeur :" FontWeight="SemiBold"></Label>
+            <TextBox x:Name="V"  IsReadOnly="True">
+                <Binding Path="SelectedOffre.Client.PrenomNom">
+                    <Binding.ValidationRules>
+                        <helpers:NotEmptyStringRule ValidatesOnTargetUpdated="True"/>
+                    </Binding.ValidationRules>
+                </Binding>
+
+            </TextBox>
+            <Label x:Name="ErrorLabel2" FontSize="9" Target="{Binding ElementName=V}">
+                <Label.Style>
+                    <Style TargetType="{x:Type Label}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding (Validation.HasError), ElementName=V}" Value="True">
+                                <Setter Property="Foreground" Value="Red" />
+                                <Setter Property="Content" Value="{Binding (Validation.Errors)[0].ErrorContent, ElementName=V}"/>
+                                <Setter Property="ToolTip" Value="{Binding (Validation.Errors)[0].ErrorContent, ElementName=V}" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Label.Style>
+            </Label>
+        </StackPanel>
+        <StackPanel Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="2"  Margin="30,20,0,0">
+            <Label Content="Agent :" FontWeight="SemiBold"></Label>
+            <ComboBox Margin="1" ItemsSource="{Binding Path=ListeAgents}" x:Name="ComAgent">
+                <ComboBox.SelectedItem>
+                    <Binding Path="SelectedAgent" ValidatesOnDataErrors="True" 
+                         Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <helpers:NotEmptyComboBoxRule ValidatesOnTargetUpdated="True"/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </ComboBox.SelectedItem>
+            </ComboBox>
+            <Label FontSize="9" Target="{Binding ElementName=ComAgent}">
+                <Label.Style>
+                    <Style TargetType="{x:Type Label}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding (Validation.HasError), ElementName=ComAgent}" Value="True">
+                                <Setter Property="Foreground" Value="Red" />
+                                <Setter Property="Content" Value="{Binding (Validation.Errors)[0].ErrorContent, ElementName=ComAgent}"/>
+                                <Setter Property="ToolTip" Value="{Binding (Validation.Errors)[0].ErrorContent, ElementName=ComAgent}" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Label.Style>
+            </Label>
+        </StackPanel>
+
+        <Button Grid.Column="2" Grid.Row="6" Height="20" Content="Enregistrer"
+                Command="{Binding NewVenteSaveCommand}" Margin="10,60,10,10"></Button>
+        <Button  Height="20" Grid.Row="6" Grid.Column="1" 
+                    Content="Annuler" Click="Annuler_Click"
+                    Margin="10,60,10,10"></Button>
+
+    </Grid>
+</Window>

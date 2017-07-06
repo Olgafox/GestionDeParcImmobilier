@@ -1,0 +1,640 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="GPI.Persistence.EntityRepositories.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Agent">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nom" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Prenom" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Rue" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Npa" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Localite" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Telephone" Type="nchar" MaxLength="12" Nullable="false" />
+          <Property Name="Actif" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nom" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Prenom" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Rue" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Npa" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Localite" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Telephone" Type="nchar" MaxLength="12" Nullable="false" />
+          <Property Name="Actif" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Demande">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TypeId" Type="int" />
+          <Property Name="RegionId" Type="int" />
+          <Property Name="NombreEtages_de" Type="int" />
+          <Property Name="NombreEtages_a" Type="int" />
+          <Property Name="Etage_de" Type="int" />
+          <Property Name="Etage_a" Type="int" />
+          <Property Name="Pieces_de" Type="decimal" Precision="18" Scale="1" />
+          <Property Name="Pieces_a" Type="decimal" Precision="18" Scale="1" />
+          <Property Name="Surface_de" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Surface_a" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Prix_de" Type="decimal" Precision="18" Scale="1" />
+          <Property Name="Prix_a" Type="decimal" Precision="18" Scale="1" />
+          <Property Name="ClientId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Offre">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TypeId" Type="int" Nullable="false" />
+          <Property Name="RegionId" Type="int" Nullable="false" />
+          <Property Name="Rue" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Npa" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Localite" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Nombre_Etages" Type="int" Nullable="false" />
+          <Property Name="Etage" Type="int" Nullable="false" />
+          <Property Name="Pieces" Type="decimal" Precision="18" Scale="1" Nullable="false" />
+          <Property Name="Surface" Type="decimal" Precision="18" Scale="3" Nullable="false" />
+          <Property Name="Prix" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="VendeurId" Type="int" Nullable="false" />
+          <Property Name="Actuel" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Region">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NomRegion" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TypeImmobilier">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TypeNom" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Vente">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AgentId" Type="int" Nullable="false" />
+          <Property Name="OffreId" Type="int" Nullable="false" />
+          <Property Name="AcheteurId" Type="int" Nullable="false" />
+          <Property Name="DateVente" Type="date" Nullable="false" />
+          <Property Name="TauxCommissionAgent" Type="decimal" Precision="18" Scale="1" Nullable="false" />
+          <Property Name="TauxCommission" Type="decimal" Precision="18" Scale="1" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Agent">
+          <End Role="Agent" Type="Self.Agent" Multiplicity="1" />
+          <End Role="Vente" Type="Self.Vente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Agent">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Vente">
+              <PropertyRef Name="AgentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="Demande" Type="Self.Demande" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Demande">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Offre_Region">
+          <End Role="Region" Type="Self.Region" Multiplicity="1" />
+          <End Role="Offre" Type="Self.Offre" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Region">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Offre">
+              <PropertyRef Name="RegionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Offre_Type">
+          <End Role="TypeImmobilier" Type="Self.TypeImmobilier" Multiplicity="1" />
+          <End Role="Offre" Type="Self.Offre" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeImmobilier">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Offre">
+              <PropertyRef Name="TypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Offre_Vendeur">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="Offre" Type="Self.Offre" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Offre">
+              <PropertyRef Name="VendeurId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Region">
+          <End Role="Region" Type="Self.Region" Multiplicity="0..1" />
+          <End Role="Demande" Type="Self.Demande" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Region">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Demande">
+              <PropertyRef Name="RegionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Type">
+          <End Role="TypeImmobilier" Type="Self.TypeImmobilier" Multiplicity="0..1" />
+          <End Role="Demande" Type="Self.Demande" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeImmobilier">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Demande">
+              <PropertyRef Name="TypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vente_Acheteur">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="Vente" Type="Self.Vente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Vente">
+              <PropertyRef Name="AcheteurId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vente_Offre">
+          <End Role="Offre" Type="Self.Offre" Multiplicity="1" />
+          <End Role="Vente" Type="Self.Vente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Offre">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Vente">
+              <PropertyRef Name="OffreId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="GPIPersistenceEntityRepositoriesStoreContainer">
+          <EntitySet Name="Agent" EntityType="Self.Agent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Demande" EntityType="Self.Demande" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Offre" EntityType="Self.Offre" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Region" EntityType="Self.Region" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TypeImmobilier" EntityType="Self.TypeImmobilier" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vente" EntityType="Self.Vente" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Agent" Association="Self.FK_Agent">
+            <End Role="Agent" EntitySet="Agent" />
+            <End Role="Vente" EntitySet="Vente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Client" Association="Self.FK_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Demande" EntitySet="Demande" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Offre_Region" Association="Self.FK_Offre_Region">
+            <End Role="Region" EntitySet="Region" />
+            <End Role="Offre" EntitySet="Offre" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Offre_Type" Association="Self.FK_Offre_Type">
+            <End Role="TypeImmobilier" EntitySet="TypeImmobilier" />
+            <End Role="Offre" EntitySet="Offre" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Offre_Vendeur" Association="Self.FK_Offre_Vendeur">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Offre" EntitySet="Offre" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Region" Association="Self.FK_Region">
+            <End Role="Region" EntitySet="Region" />
+            <End Role="Demande" EntitySet="Demande" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Type" Association="Self.FK_Type">
+            <End Role="TypeImmobilier" EntitySet="TypeImmobilier" />
+            <End Role="Demande" EntitySet="Demande" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vente_Acheteur" Association="Self.FK_Vente_Acheteur">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Vente" EntitySet="Vente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vente_Offre" Association="Self.FK_Vente_Offre">
+            <End Role="Offre" EntitySet="Offre" />
+            <End Role="Vente" EntitySet="Vente" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="GPI.Persistence.EntityRepositories" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Agent">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nom" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Prenom" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Rue" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Npa" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Localite" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Telephone" Type="String" MaxLength="12" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Actif" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="Ventes" Relationship="Self.FK_Agent" FromRole="Agent" ToRole="Vente" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nom" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Prenom" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Rue" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Npa" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Localite" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Telephone" Type="String" MaxLength="12" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Actif" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="Demandes" Relationship="Self.FK_Client" FromRole="Client" ToRole="Demande" />
+          <NavigationProperty Name="Offres" Relationship="Self.FK_Offre_Vendeur" FromRole="Client" ToRole="Offre" />
+          <NavigationProperty Name="Ventes" Relationship="Self.FK_Vente_Acheteur" FromRole="Client" ToRole="Vente" />
+        </EntityType>
+        <EntityType Name="Demande">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TypeId" Type="Int32" />
+          <Property Name="RegionId" Type="Int32" />
+          <Property Name="NombreEtages_de" Type="Int32" />
+          <Property Name="NombreEtages_a" Type="Int32" />
+          <Property Name="Etage_de" Type="Int32" />
+          <Property Name="Etage_a" Type="Int32" />
+          <Property Name="Pieces_de" Type="Decimal" Precision="18" Scale="1" />
+          <Property Name="Pieces_a" Type="Decimal" Precision="18" Scale="1" />
+          <Property Name="Surface_de" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Surface_a" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Prix_de" Type="Decimal" Precision="18" Scale="1" />
+          <Property Name="Prix_a" Type="Decimal" Precision="18" Scale="1" />
+          <Property Name="ClientId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Client" Relationship="Self.FK_Client" FromRole="Demande" ToRole="Client" />
+          <NavigationProperty Name="Region" Relationship="Self.FK_Region" FromRole="Demande" ToRole="Region" />
+          <NavigationProperty Name="TypeImmobilier" Relationship="Self.FK_Type" FromRole="Demande" ToRole="TypeImmobilier" />
+        </EntityType>
+        <EntityType Name="Offre">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TypeId" Type="Int32" Nullable="false" />
+          <Property Name="RegionId" Type="Int32" Nullable="false" />
+          <Property Name="Rue" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Npa" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Localite" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Nombre_Etages" Type="Int32" Nullable="false" />
+          <Property Name="Etage" Type="Int32" Nullable="false" />
+          <Property Name="Pieces" Type="Decimal" Precision="18" Scale="1" Nullable="false" />
+          <Property Name="Surface" Type="Decimal" Precision="18" Scale="3" Nullable="false" />
+          <Property Name="Prix" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="VendeurId" Type="Int32" Nullable="false" />
+          <Property Name="Actuel" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="Client" Relationship="Self.FK_Offre_Vendeur" FromRole="Offre" ToRole="Client" />
+          <NavigationProperty Name="Region" Relationship="Self.FK_Offre_Region" FromRole="Offre" ToRole="Region" />
+          <NavigationProperty Name="TypeImmobilier" Relationship="Self.FK_Offre_Type" FromRole="Offre" ToRole="TypeImmobilier" />
+          <NavigationProperty Name="Ventes" Relationship="Self.FK_Vente_Offre" FromRole="Offre" ToRole="Vente" />
+        </EntityType>
+        <EntityType Name="Region">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NomRegion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Demandes" Relationship="Self.FK_Region" FromRole="Region" ToRole="Demande" />
+          <NavigationProperty Name="Offres" Relationship="Self.FK_Offre_Region" FromRole="Region" ToRole="Offre" />
+        </EntityType>
+        <EntityType Name="TypeImmobilier">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TypeNom" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Demandes" Relationship="Self.FK_Type" FromRole="TypeImmobilier" ToRole="Demande" />
+          <NavigationProperty Name="Offres" Relationship="Self.FK_Offre_Type" FromRole="TypeImmobilier" ToRole="Offre" />
+        </EntityType>
+        <EntityType Name="Vente">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AgentId" Type="Int32" Nullable="false" />
+          <Property Name="OffreId" Type="Int32" Nullable="false" />
+          <Property Name="AcheteurId" Type="Int32" Nullable="false" />
+          <Property Name="DateVente" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="TauxCommissionAgent" Type="Decimal" Precision="18" Scale="1" Nullable="false" />
+          <Property Name="TauxCommission" Type="Decimal" Precision="18" Scale="1" Nullable="false" />
+          <NavigationProperty Name="Agent" Relationship="Self.FK_Agent" FromRole="Vente" ToRole="Agent" />
+          <NavigationProperty Name="Client" Relationship="Self.FK_Vente_Acheteur" FromRole="Vente" ToRole="Client" />
+          <NavigationProperty Name="Offre" Relationship="Self.FK_Vente_Offre" FromRole="Vente" ToRole="Offre" />
+        </EntityType>
+        <Association Name="FK_Agent">
+          <End Role="Agent" Type="Self.Agent" Multiplicity="1" />
+          <End Role="Vente" Type="Self.Vente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Agent">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Vente">
+              <PropertyRef Name="AgentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="Demande" Type="Self.Demande" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Demande">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Offre_Vendeur">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="Offre" Type="Self.Offre" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Offre">
+              <PropertyRef Name="VendeurId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vente_Acheteur">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="Vente" Type="Self.Vente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Vente">
+              <PropertyRef Name="AcheteurId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Region">
+          <End Role="Region" Type="Self.Region" Multiplicity="0..1" />
+          <End Role="Demande" Type="Self.Demande" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Region">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Demande">
+              <PropertyRef Name="RegionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Type">
+          <End Role="TypeImmobilier" Type="Self.TypeImmobilier" Multiplicity="0..1" />
+          <End Role="Demande" Type="Self.Demande" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeImmobilier">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Demande">
+              <PropertyRef Name="TypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Offre_Region">
+          <End Role="Region" Type="Self.Region" Multiplicity="1" />
+          <End Role="Offre" Type="Self.Offre" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Region">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Offre">
+              <PropertyRef Name="RegionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Offre_Type">
+          <End Role="TypeImmobilier" Type="Self.TypeImmobilier" Multiplicity="1" />
+          <End Role="Offre" Type="Self.Offre" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeImmobilier">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Offre">
+              <PropertyRef Name="TypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vente_Offre">
+          <End Role="Offre" Type="Self.Offre" Multiplicity="1" />
+          <End Role="Vente" Type="Self.Vente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Offre">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Vente">
+              <PropertyRef Name="OffreId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="GPI_EntityDataModel" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Agents" EntityType="Self.Agent" />
+          <EntitySet Name="Clients" EntityType="Self.Client" />
+          <EntitySet Name="Demandes" EntityType="Self.Demande" />
+          <EntitySet Name="Offres" EntityType="Self.Offre" />
+          <EntitySet Name="Regions" EntityType="Self.Region" />
+          <EntitySet Name="TypeImmobiliers" EntityType="Self.TypeImmobilier" />
+          <EntitySet Name="Ventes" EntityType="Self.Vente" />
+          <AssociationSet Name="FK_Agent" Association="Self.FK_Agent">
+            <End Role="Agent" EntitySet="Agents" />
+            <End Role="Vente" EntitySet="Ventes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Client" Association="Self.FK_Client">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="Demande" EntitySet="Demandes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Offre_Vendeur" Association="Self.FK_Offre_Vendeur">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="Offre" EntitySet="Offres" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vente_Acheteur" Association="Self.FK_Vente_Acheteur">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="Vente" EntitySet="Ventes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Region" Association="Self.FK_Region">
+            <End Role="Region" EntitySet="Regions" />
+            <End Role="Demande" EntitySet="Demandes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Type" Association="Self.FK_Type">
+            <End Role="TypeImmobilier" EntitySet="TypeImmobiliers" />
+            <End Role="Demande" EntitySet="Demandes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Offre_Region" Association="Self.FK_Offre_Region">
+            <End Role="Region" EntitySet="Regions" />
+            <End Role="Offre" EntitySet="Offres" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Offre_Type" Association="Self.FK_Offre_Type">
+            <End Role="TypeImmobilier" EntitySet="TypeImmobiliers" />
+            <End Role="Offre" EntitySet="Offres" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vente_Offre" Association="Self.FK_Vente_Offre">
+            <End Role="Offre" EntitySet="Offres" />
+            <End Role="Vente" EntitySet="Ventes" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="GPIPersistenceEntityRepositoriesStoreContainer" CdmEntityContainer="GPI_EntityDataModel">
+          <EntitySetMapping Name="Agents">
+            <EntityTypeMapping TypeName="GPI.Persistence.EntityRepositories.Agent">
+              <MappingFragment StoreEntitySet="Agent">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Prenom" ColumnName="Prenom" />
+                <ScalarProperty Name="Rue" ColumnName="Rue" />
+                <ScalarProperty Name="Npa" ColumnName="Npa" />
+                <ScalarProperty Name="Localite" ColumnName="Localite" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="Actif" ColumnName="Actif" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clients">
+            <EntityTypeMapping TypeName="GPI.Persistence.EntityRepositories.Client">
+              <MappingFragment StoreEntitySet="Client">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Prenom" ColumnName="Prenom" />
+                <ScalarProperty Name="Rue" ColumnName="Rue" />
+                <ScalarProperty Name="Npa" ColumnName="Npa" />
+                <ScalarProperty Name="Localite" ColumnName="Localite" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="Actif" ColumnName="Actif" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Demandes">
+            <EntityTypeMapping TypeName="GPI.Persistence.EntityRepositories.Demande">
+              <MappingFragment StoreEntitySet="Demande">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+                <ScalarProperty Name="RegionId" ColumnName="RegionId" />
+                <ScalarProperty Name="NombreEtages_de" ColumnName="NombreEtages_de" />
+                <ScalarProperty Name="NombreEtages_a" ColumnName="NombreEtages_a" />
+                <ScalarProperty Name="Etage_de" ColumnName="Etage_de" />
+                <ScalarProperty Name="Etage_a" ColumnName="Etage_a" />
+                <ScalarProperty Name="Pieces_de" ColumnName="Pieces_de" />
+                <ScalarProperty Name="Pieces_a" ColumnName="Pieces_a" />
+                <ScalarProperty Name="Surface_de" ColumnName="Surface_de" />
+                <ScalarProperty Name="Surface_a" ColumnName="Surface_a" />
+                <ScalarProperty Name="Prix_de" ColumnName="Prix_de" />
+                <ScalarProperty Name="Prix_a" ColumnName="Prix_a" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Offres">
+            <EntityTypeMapping TypeName="GPI.Persistence.EntityRepositories.Offre">
+              <MappingFragment StoreEntitySet="Offre">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+                <ScalarProperty Name="RegionId" ColumnName="RegionId" />
+                <ScalarProperty Name="Rue" ColumnName="Rue" />
+                <ScalarProperty Name="Npa" ColumnName="Npa" />
+                <ScalarProperty Name="Localite" ColumnName="Localite" />
+                <ScalarProperty Name="Nombre_Etages" ColumnName="Nombre_Etages" />
+                <ScalarProperty Name="Etage" ColumnName="Etage" />
+                <ScalarProperty Name="Pieces" ColumnName="Pieces" />
+                <ScalarProperty Name="Surface" ColumnName="Surface" />
+                <ScalarProperty Name="Prix" ColumnName="Prix" />
+                <ScalarProperty Name="VendeurId" ColumnName="VendeurId" />
+                <ScalarProperty Name="Actuel" ColumnName="Actuel" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Regions">
+            <EntityTypeMapping TypeName="GPI.Persistence.EntityRepositories.Region">
+              <MappingFragment StoreEntitySet="Region">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="NomRegion" ColumnName="NomRegion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TypeImmobiliers">
+            <EntityTypeMapping TypeName="GPI.Persistence.EntityRepositories.TypeImmobilier">
+              <MappingFragment StoreEntitySet="TypeImmobilier">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TypeNom" ColumnName="TypeNom" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ventes">
+            <EntityTypeMapping TypeName="GPI.Persistence.EntityRepositories.Vente">
+              <MappingFragment StoreEntitySet="Vente">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="AgentId" ColumnName="AgentId" />
+                <ScalarProperty Name="OffreId" ColumnName="OffreId" />
+                <ScalarProperty Name="AcheteurId" ColumnName="AcheteurId" />
+                <ScalarProperty Name="DateVente" ColumnName="DateVente" />
+                <ScalarProperty Name="TauxCommissionAgent" ColumnName="TauxCommissionAgent" />
+                <ScalarProperty Name="TauxCommission" ColumnName="TauxCommission" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

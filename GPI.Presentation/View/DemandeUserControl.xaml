@@ -1,0 +1,135 @@
+﻿<UserControl x:Class="GPI.Presentation.View.DemandeUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:GPI.Presentation.View"
+             xmlns:helpers="clr-namespace:GPI.Presentation.Mvvm"
+             mc:Ignorable="d" 
+             d:DesignHeight="650" d:DesignWidth="700">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="*"/>
+
+        </Grid.ColumnDefinitions>
+
+        <ListView   Margin="30,30,0,50" Grid.Column="0" Grid.Row="1" Height="430"
+                        ItemsSource="{Binding ListeDemandes}" SelectedItem="{Binding CurrentDemande}" Width="200"/>
+        
+        <StackPanel Orientation="Horizontal" Background="FloralWhite" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,20,0,0">
+            <TextBox Width="175" Height="25" Background="WhiteSmoke"  x:Name="ChercheTextBox" Margin="30,2,0,2">
+            </TextBox>
+            <Button Height="25" Width="25" Margin="0,2,2,2" Background="FloralWhite" Command="{Binding ChercherDemandeCommand}" CommandParameter="{Binding ElementName=ChercheTextBox, Path=Text}" ToolTip="Chercher la démande par Nom du Client">
+                <Image Source="/Images/searchIcon2.png"></Image>
+            </Button>
+            <Button   Command="{Binding SupprimerCommand}" Width="40" Height="40" Background="FloralWhite" Margin="130,0,0,4" ToolTip="Supprimer cette demande">
+                <Image Source="/Images/deleteIcon.png" Stretch="UniformToFill" />
+            </Button>
+            <Button  Command="{Binding SauverCommand}" Width="40" Height="40" Background="FloralWhite"  Margin="30,0,0,4" ToolTip="Enregistrer les changements">
+                <Image Source="/Images/saveIcon.png" Stretch="UniformToFill"/>
+            </Button>
+            <Button  Command="{Binding NewDemandeCommand}"
+                         Width="40" Height="40" Background="FloralWhite"  
+                         Margin="30,0,0,4" ToolTip="Ajouter une nouvelle demande">
+                <Image Source="/Images/newIcon.png" Stretch="UniformToFill" RenderTransformOrigin="0.5,0.5"/>
+            </Button>
+            <Button  Command="{Binding ChercherCommand}" Width="80" Height="40" 
+                         Background="FloralWhite" 
+                         Margin="30,0,0,4" ToolTip="Chercher les offres correspondantes">
+                <Image Source="/Images/searchIcon2.png" Margin="30,1,1,1" ></Image>
+            </Button>
+        </StackPanel>
+
+        <Grid Grid.Row="1" Grid.Column="1" x:Name="DemandeDetailGrid" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"/>
+
+
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0" Grid.Row="0" Margin="30,30,0,0" Width="180">
+                <Label Content="Type de bien :" FontWeight="SemiBold"></Label>
+                <ComboBox  ItemsSource="{Binding Path=TypesImmobilier}" SelectedItem="{Binding Path=SelectedType}" 
+                          IsEditable="True" IsReadOnly="true" Text="{Binding CurrentDemande.TypeImmobilier.TypeNom}"/>
+             
+            </StackPanel>
+            <StackPanel Grid.Column="1" Grid.Row="0" Margin="30,30,30,0" Width="180">
+                <Label Content="Region :" FontWeight="SemiBold"  ></Label>
+                <ComboBox Margin="1"  ItemsSource="{Binding Path=ListeRegions}" 
+                          SelectedItem="{Binding Path=SelectedRegion}" 
+                          IsEditable="True"  IsReadOnly="true" Text="{Binding CurrentDemande.Region.NomRegion}"/>
+            </StackPanel>
+            <StackPanel Grid.Column="0" Grid.Row="1"  Margin="30,30,0,0">
+                <Label Content="Prix de :" Margin="0,0,0,10" FontWeight="SemiBold"></Label>
+                <TextBox Margin="1" TextBox.Text="{Binding Path=CurrentDemande.Prix_de}" Width="100"></TextBox>
+                <Label Content="Prix à :" FontWeight="SemiBold"></Label>
+                <TextBox Margin="1" Width="100" TextBox.Text="{Binding Path=CurrentDemande.Prix_a}"></TextBox>
+            </StackPanel>
+            <StackPanel Grid.Column="0" Grid.Row="3"  Margin="30,30,0,0">
+                <Label Content="Etage :" FontWeight="SemiBold" Margin="0,0,0,10"></Label>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="de :" ></Label>
+                    <TextBox Margin="1" TextBox.Text="{Binding Path=CurrentDemande.Etage_de}" Width="50"></TextBox>
+                    <Label Content="à :" Margin="25,0,0,0" ></Label>
+                    <TextBox Margin="1" Width="50" TextBox.Text="{Binding Path=CurrentDemande.Etage_a}"></TextBox>
+                </StackPanel>
+            </StackPanel>
+
+            <StackPanel Grid.Column="1" Grid.Row="3"   Margin="30,30,0,0" >
+                <Label Content="Nbr d'étages :" Margin="0,0,0,10" FontWeight="SemiBold"></Label>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="de :" ></Label>
+                    <TextBox Margin="1" TextBox.Text="{Binding Path=CurrentDemande.NombreEtages_de}" Width="50"></TextBox>
+                    <Label Content="à :" Margin="25,0,0,0"></Label>
+                    <TextBox Margin="1" Width="50" TextBox.Text="{Binding Path=CurrentDemande.NombreEtages_a}"></TextBox>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Grid.Column="0" Grid.Row="2"  Margin="30,30,0,0" Grid.ColumnSpan="2">
+                <Label Content="Pièces :" FontWeight="SemiBold" Margin="0,0,0,10"></Label>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="de :" ></Label>
+                    <TextBox Margin="1" TextBox.Text="{Binding Path=CurrentDemande.Pieces_de}" Width="50"></TextBox>
+                    <Label Content="à :" Margin="25,0,0,0" ></Label>
+                    <TextBox Margin="1" Width="50" TextBox.Text="{Binding Path=CurrentDemande.Pieces_a}"></TextBox>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Grid.Column="1" Grid.Row="2"  Margin="30,30,0,0">
+                <Label Content="Surface :" FontWeight="SemiBold"  Margin="0,0,0,10"></Label>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="de :" ></Label>
+                    <TextBox Margin="1" TextBox.Text="{Binding Path=CurrentDemande.Surface_de}" Width="50"></TextBox>
+                    <Label Content="à :"  Margin="25,0,0,0"></Label>
+                    <TextBox Margin="1" Width="50" TextBox.Text="{Binding Path=CurrentDemande.Surface_a}"></TextBox>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Grid.Column="1" Grid.Row="1" Margin="30,30,30,0" Width="180">
+                <Label Content="Client (Obligatoire):" Margin="0,0,0,10" FontWeight="SemiBold"></Label>
+                <ComboBox Margin="1"  ItemsSource="{Binding Path=ListeClients}"
+                          IsEditable="True"  IsReadOnly="true" Text="{Binding CurrentDemande.Client.PrenomNom}">
+                    <ComboBox.SelectedItem>
+                        <Binding Path="SelectedClient" ValidatesOnDataErrors="True" 
+                         Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <helpers:NotEmptyComboBoxRule ValidatesOnTargetUpdated="True"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </ComboBox.SelectedItem>
+                </ComboBox>
+            </StackPanel>
+
+        </Grid>
+    </Grid>
+</UserControl>

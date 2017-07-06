@@ -1,0 +1,45 @@
+﻿<Window x:Class="GPI.Presentation.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GPI.Presentation"
+        xmlns:views="clr-namespace:GPI.Presentation.View"
+        mc:Ignorable="d"
+       Title="Gestion de Parc Immobilier" Height="650" Width="750"   WindowStartupLocation="CenterScreen" Closing="Window_Closing">
+
+    <Window.Resources>
+        <ResourceDictionary Source="MainWindowResources.xaml"/>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Border Style="{StaticResource MainBorderStyle}" Grid.Row="0" Height="50" Width="Auto" Margin="4">
+            <WrapPanel Style="{StaticResource WrapPanelStyle}" HorizontalAlignment="Center">
+
+                <Menu  KeyboardNavigation.TabNavigation="Cycle" Background="FloralWhite" FontSize="20" x:Name="MainMenu">
+                    <MenuItem  Style="{StaticResource MenuItemStyle}" Header="Offre" IsChecked="True" x:Name="MenuOffre" Click="MainMenu_Click" StaysOpenOnClick="True" Margin="15,0,0,0" FontSize="18" FontWeight="SemiBold" ></MenuItem>
+                    <Separator Background="Gray" BorderBrush="Gray" BorderThickness="0.5"></Separator>
+                    <MenuItem  Style="{StaticResource MenuItemStyle}" Header="Demande" x:Name="MenuDemande" Click="MainMenu_Click" StaysOpenOnClick="True" Margin="10,0,0,0" FontSize="18" FontWeight="SemiBold"/>
+                    <Separator Background="Gray" BorderBrush="Gray" BorderThickness="0.5"></Separator>
+                    <MenuItem  Style="{StaticResource MenuItemStyle}" Header="Vente" x:Name="MenuVente" Click="MainMenu_Click" StaysOpenOnClick="True" Margin="10,0,0,0" FontSize="18" FontWeight="SemiBold"></MenuItem>
+                    <Separator Background="Gray" BorderBrush="Gray" BorderThickness="0.5"></Separator>
+                    <MenuItem  Style="{StaticResource MenuItemStyle}" Header="Agent" x:Name="MenuAgent" Click="MainMenu_Click" StaysOpenOnClick="True" Margin="10,0,0,0" FontSize="18" FontWeight="SemiBold"></MenuItem>
+                    <Separator Background="Gray" BorderBrush="Gray" BorderThickness="0.5"></Separator>
+                    <MenuItem  Style="{StaticResource MenuItemStyle}" Header="Client" x:Name="MenuClient"  Click="MainMenu_Click" StaysOpenOnClick="True" Margin="10,0,0,0" FontSize="18" FontWeight="SemiBold"/>
+                    <Separator Background="Gray" BorderBrush="Gray" BorderThickness="0.5"></Separator>
+                    <MenuItem  Style="{StaticResource MenuItemStyle}" Header="Region / Type" x:Name="MenuRegionType"  Click="MainMenu_Click" StaysOpenOnClick="True" Margin="10,0,0,0" FontSize="18" FontWeight="SemiBold"/>
+                </Menu>
+            </WrapPanel>
+        </Border>
+        <StackPanel Name="MainStackPanel" Grid.Row="1"  Background="WhiteSmoke">
+            <ContentControl>
+                <views:OffreUserControl></views:OffreUserControl>
+            </ContentControl>
+        </StackPanel>
+        <TextBlock TextAlignment="Center" Text="Gestion de Parc Immobilier - 2017. Par Olga Fragnière" Grid.Row="2" Height="20" Background="FloralWhite"/>
+    </Grid>
+</Window>

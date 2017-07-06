@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="34d1c1a4dd08417c84a78a766b0b80a8" Name="Diagram1">
+        <EntityTypeShape EntityType="GPI.Persistence.EntityRepositories.Agent" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GPI.Persistence.EntityRepositories.Client" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="GPI.Persistence.EntityRepositories.Demande" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="GPI.Persistence.EntityRepositories.Offre" Width="1.5" PointX="6" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="GPI.Persistence.EntityRepositories.Region" Width="1.5" PointX="0.75" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="GPI.Persistence.EntityRepositories.TypeImmobilier" Width="1.5" PointX="0.75" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="GPI.Persistence.EntityRepositories.Vente" Width="1.5" PointX="8.25" PointY="5.625" IsExpanded="true" />
+        <AssociationConnector Association="GPI.Persistence.EntityRepositories.FK_Agent" ManuallyRouted="false" />
+        <AssociationConnector Association="GPI.Persistence.EntityRepositories.FK_Client" ManuallyRouted="false" />
+        <AssociationConnector Association="GPI.Persistence.EntityRepositories.FK_Offre_Vendeur" ManuallyRouted="false" />
+        <AssociationConnector Association="GPI.Persistence.EntityRepositories.FK_Vente_Acheteur" ManuallyRouted="false" />
+        <AssociationConnector Association="GPI.Persistence.EntityRepositories.FK_Region" ManuallyRouted="false" />
+        <AssociationConnector Association="GPI.Persistence.EntityRepositories.FK_Type" ManuallyRouted="false" />
+        <AssociationConnector Association="GPI.Persistence.EntityRepositories.FK_Offre_Region" ManuallyRouted="false" />
+        <AssociationConnector Association="GPI.Persistence.EntityRepositories.FK_Offre_Type" ManuallyRouted="false" />
+        <AssociationConnector Association="GPI.Persistence.EntityRepositories.FK_Vente_Offre" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

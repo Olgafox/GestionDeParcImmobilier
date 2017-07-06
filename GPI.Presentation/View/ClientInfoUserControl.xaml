@@ -1,0 +1,141 @@
+﻿<UserControl x:Class="GPI.Presentation.View.ClientInfoUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:GPI.Presentation.View"
+             xmlns:helpers="clr-namespace:GPI.Presentation.Mvvm"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="450">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" Grid.Row="0" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,20,10,0" Background="FloralWhite" Width="426">
+            <Button Command="{Binding VoirListeDemandes}" Width="80" Height="40" Content="Demandes" FontSize="16" FontWeight="SemiBold"
+                        Background="FloralWhite" Margin="110,2,2,4" ToolTip="Voir liste des Demandes du Client">
+
+            </Button>
+            <Button Command="{Binding VoirListeOffres}" Width="80" Height="40" Content="Offres" FontSize="16" FontWeight="SemiBold"
+                        Background="FloralWhite" Margin="20,2,2,4" ToolTip="Voir liste des Offres du Client">
+
+            </Button>
+            <Button Command="{Binding ImprimerCommand}" Width="40" Height="40" Background="FloralWhite" Margin="20,2,0,4" ToolTip="Imprimer les détails">
+                <Image Source="/Images/printIcon.png" Stretch="UniformToFill" />
+            </Button>
+
+            <Button  Command="{Binding SauverCommand}" Width="40" Height="40" Background="FloralWhite"  Margin="20,2,0,4" ToolTip="Enregistrer les changements">
+                <Image Source="/Images/saveIcon.png" Stretch="UniformToFill"/>
+            </Button>
+
+        </StackPanel>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Row="0" Width="180" Margin="30,20,0,0" >
+                <Label Content="Nom :" FontWeight="SemiBold" ></Label>
+                <TextBox Margin="1">
+                    <Binding Path="CurrentClient.Nom">
+                        <Binding.ValidationRules>
+                            <helpers:NotEmptyStringRule ValidatesOnTargetUpdated="True"/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox>
+            </StackPanel>
+            <StackPanel Grid.Column="1" Grid.Row="0" Width="180" Margin="30,20,0,0">
+                <Label Content="Prenom:" FontWeight="SemiBold" ></Label>
+                <TextBox Margin="1">
+                    <Binding Path="CurrentClient.Prenom">
+                        <Binding.ValidationRules>
+                            <helpers:NotEmptyStringRule ValidatesOnTargetUpdated="True"/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox>
+            </StackPanel>
+            <StackPanel Grid.Column="0" Grid.Row="1" Width="180" Margin="30,20,0,0" >
+                <Label Content="Rue :" FontWeight="SemiBold"></Label>
+                <TextBox Margin="1" >
+                    <Binding Path="CurrentClient.Rue">
+                        <Binding.ValidationRules>
+                            <helpers:NotEmptyStringRule ValidatesOnTargetUpdated="True"/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox>
+            </StackPanel>
+            <StackPanel Grid.Column="1" Grid.Row="2" Width="180" Margin="30,20,0,0">
+                <Label Content="Téléphone :" FontWeight="SemiBold"></Label>
+                <TextBox Margin="1">
+                    <Binding Path="CurrentClient.Telephone">
+                        <Binding.ValidationRules>
+                            <helpers:NotEmptyStringRule ValidatesOnTargetUpdated="True"/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox>
+            </StackPanel>
+
+
+            <StackPanel Grid.Column="2" Grid.Row="1" Width="180" Margin="30,20,0,0">
+                <Label Content="NPA :" FontWeight="SemiBold" ></Label>
+                <TextBox Margin="1">
+                    <Binding Path="CurrentClient.Npa">
+                        <Binding.ValidationRules>
+                            <helpers:NotEmptyStringRule ValidatesOnTargetUpdated="True"/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox>
+            </StackPanel>
+            <StackPanel Grid.Column="0" Grid.Row ="2" Width="180" Margin="30,20,0,0">
+                <Label Content="Localité :" FontWeight="SemiBold" ></Label>
+                <TextBox Margin="1">
+                    <Binding Path="CurrentClient.Localite">
+                        <Binding.ValidationRules>
+                            <helpers:NotEmptyStringRule ValidatesOnTargetUpdated="True"/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox>
+            </StackPanel>
+            <Label Content="Biens achetés :" Margin="30,20,0,0" Grid.Column="0" Grid.Row ="3" Grid.ColumnSpan="2"  FontWeight="SemiBold" BorderBrush="LightGray" BorderThickness="1" Background="FloralWhite">
+            </Label>
+            <DataGrid Grid.Column="0" Grid.Row ="3" Grid.ColumnSpan="2" ItemsSource="{Binding CurrentClient.Ventes, Mode=TwoWay}" 
+                          IsReadOnly="True" SelectedItem="{Binding SelectedVente, Mode=TwoWay}"  EnableRowVirtualization="True" SelectionMode="Single"
+                            AutoGenerateColumns="False" BorderBrush="LightGray" BorderThickness="1" Background="FloralWhite"
+                            Margin="30,50,0,0" >
+                <DataGrid.InputBindings>
+                    <MouseBinding MouseAction="LeftDoubleClick"
+                  Command="{Binding Path=MouseDoubleClickCommand}" />
+                </DataGrid.InputBindings>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Nom du bien" Binding="{Binding Offre.NomOffre}" Width="120" ></DataGridTextColumn>
+                    <DataGridTextColumn Header="Prix de bien" Binding="{Binding Offre.Prix}"  Width="100"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Date de Vente" Binding="{Binding DateVenteFormated}"  Width="100"></DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+            <Label Content="Biens Vendus :" Margin="30,20,0,0" Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="2"  FontWeight="SemiBold" BorderBrush="LightGray" BorderThickness="1" Background="FloralWhite">
+            </Label>
+            <DataGrid Grid.Column="0" Grid.Row ="4" Grid.ColumnSpan="2" ItemsSource="{Binding CurrentClient.ListeVentes, Mode=TwoWay}" 
+                          IsReadOnly="True" SelectedItem="{Binding SelectedOffre, Mode=TwoWay}" 
+                            AutoGenerateColumns="False" BorderBrush="LightGray" BorderThickness="1" Background="FloralWhite"
+                            Margin="30,50,0,0">
+                <DataGrid.InputBindings>
+                    <MouseBinding MouseAction="LeftDoubleClick"
+                  Command="{Binding Path=VentesMouseDoubleClickCommand}" />
+                </DataGrid.InputBindings>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Nom du bien" Binding="{Binding NomOffre}" Width="120" ></DataGridTextColumn>
+                    <DataGridTextColumn Header="Prix de bien" Binding="{Binding Prix}"  Width="100"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Date de Vente" Binding="{Binding DateVenteFormated}"  Width="100"></DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+    </Grid>
+</UserControl>
